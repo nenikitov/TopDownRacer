@@ -6,7 +6,4 @@ class Car
 		Car(Player player);
 	private:
 		Player player;
-		double speed = 10;
-		double acceleration;
-
 };
