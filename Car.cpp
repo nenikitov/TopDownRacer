@@ -7,6 +7,7 @@ Car::Car(Player& player, sf::RectangleShape& carShape) : carShape(carShape), pla
 	this->carShape = carShape;
 	this->position[0] = carShape.getPosition().x;
 	this->position[1] = carShape.getPosition().y;
+	this->angle = carShape.getRotation() / -180 * 3.14159265358979323846;
 }
 
 void Car::physicsUpdate(double frameDelta)

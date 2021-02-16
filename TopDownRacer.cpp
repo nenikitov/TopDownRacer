@@ -12,6 +12,7 @@ int main()
     carShape.setFillColor(sf::Color::Red);
     carShape.setOrigin(25, 50);
     carShape.setPosition(800, 450);
+    carShape.setRotation(45);
 
     Player player;
     Car car(player, carShape);
