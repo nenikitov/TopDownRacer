@@ -1,8 +1,7 @@
 #pragma once
 #include "Player.h"
 #include <SFML\Graphics\RectangleShape.hpp>
-class Car
-{
+class Car{
 	public:
 		Car(Player& player, sf::RectangleShape& carShape);
 		void physicsUpdate(double frameDelta);
