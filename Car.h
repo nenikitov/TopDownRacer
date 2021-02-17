@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include <SFML\Graphics\RectangleShape.hpp>
+
 class Car
 {
 	public:
@@ -10,15 +11,14 @@ class Car
 		Player& player;
 		sf::RectangleShape& carShape;
 
-		double position[2] = { 0, 0 };
+		sf::Vector2f position = sf::Vector2f(0, 0);
+		sf::Vector2f velocity = sf::Vector2f(0, 0);
 		double angle = 0;
 
-		double velocity[2] = { 0, 0 };
-		double angularVelocity = 0;
-
-		double drag = 0.999;
-		double angularDrag = 0.75;
-		
-		double power = 1;
-		double turnSpeed = 10;
+		double engineForceFWD = 500000;
+		double engineForceBWD = 200000;
+		double mass = 1439;
+		double cdrag = 0.29;
+		double croll = 12.8;
+		double cbreak = 400000;
 };
