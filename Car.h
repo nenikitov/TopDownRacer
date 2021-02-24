@@ -69,13 +69,13 @@ class Car
 		// Car parameters
 		const double GRAVITY = 9.81;
 		const double MASS = 1400;
-		const double INERTIA = 1;
+		const double INERTIA_MULTIPLIER = 1;
 		const double HALF_WIDTH = carShape.getSize().x / 2;
+		const double CG_HEIGHT = 10;
 		const double CG_TO_FRONT = carShape.getSize().y / 1.8;
 		const double CG_TO_BACK = CG_TO_FRONT;
 		const double CG_TO_FRONT_AXLE = carShape.getSize().y / 1.5;
 		const double CG_TO_BACK_AXLE = carShape.getSize().y / 1.5;
-		const double CG_HEIGHT = 10;
 		const double WHEEL_RADIUS = 5;
 		const double TYPE_GRIP = 1.5;
 		const double LOCK_GRIP = 0.7;
