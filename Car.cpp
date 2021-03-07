@@ -27,6 +27,14 @@ void Car::physicsUpdate(double frameDelta)
 	this->angle = carShape.getRotation() / -180 * 3.14159265358979323846;
 	#pragma endregion
 
+	#pragma region Pre calculate values
+	double sinAngle = sin(angle);
+	double cosAngle = cos(angle);
+
+	this->velocityLocal.x = cosAngle * this->velocity.x + sinAngle * this->velocity.y;
+	this->velocityLocal.y = cosAngle * this->velocity.y - sinAngle * this->velocity.x;
+	#pragma endregion
+
 	#pragma region Interpret player controls
 	/*
 	double currentEngineForce;
