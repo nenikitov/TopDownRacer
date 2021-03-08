@@ -40,7 +40,15 @@ void Car::physicsUpdate(double frameDelta)
 	#pragma endregion
 
 	#pragma region Weigth
-	
+	double frontWeight = this->MASS * (this->weightRatioFront * this->GRAVITY
+		- this->WEIGHT_TRANSFER_VALUE * this->accelerationLocal.x * this->CG_HEIGHT / this->wheelBase);
+	double backWeight = this->MASS * (this->weightRatioBack * this->GRAVITY
+		+ this->WEIGHT_TRANSFER_VALUE * this->accelerationLocal.x * this->CG_HEIGHT / this->wheelBase);
+	#pragma endregion
+
+	#pragma region Yaw speed
+	double yawSpeedFront = this->CG_TO_FRONT_AXLE * this->steer;
+	double yawSpeedBack = this->CG_TO_BACK_AXLE * this->steer;
 	#pragma endregion
 
 
