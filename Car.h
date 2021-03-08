@@ -65,6 +65,10 @@ class Car
 		/// The steer of the wheels in radians
 		/// </summary>
 		double steer = 0;
+		double inertia = 0;
+		double wheelBase = 0;
+		double weightRatioFront = 0;
+		double weightRatioBack = 0;
 
 		// Car parameters
 		const double GRAVITY = 9.81;

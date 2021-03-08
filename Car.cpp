@@ -13,7 +13,11 @@ Car::Car(Player& player, sf::RectangleShape& carShape) : carShape(carShape), pla
 	//this->carShape = carShape;
 	this->position = carShape.getPosition();
 	this->angle = carShape.getRotation() / -180 * 3.14159265358979323846;
-	std::cout << this->HALF_WIDTH;
+
+	this->inertia = this->MASS * this->INERTIA_MULTIPLIER;
+	this->wheelBase = this->CG_TO_FRONT_AXLE + this->CG_TO_BACK_AXLE;
+	this->weightRatioFront = this->CG_TO_BACK_AXLE / this->wheelBase;
+	this->weightRatioBack = this->CG_TO_FRONT_AXLE / this->wheelBase;
 }
 
 /// <summary>
@@ -34,6 +38,11 @@ void Car::physicsUpdate(double frameDelta)
 	this->velocityLocal.x = cosAngle * this->velocity.x + sinAngle * this->velocity.y;
 	this->velocityLocal.y = cosAngle * this->velocity.y - sinAngle * this->velocity.x;
 	#pragma endregion
+
+	#pragma region Weigth
+	
+	#pragma endregion
+
 
 	#pragma region Interpret player controls
 	/*
