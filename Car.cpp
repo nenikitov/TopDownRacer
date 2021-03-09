@@ -23,8 +23,10 @@ void Car::physicsUpdate(double frameDelta)
 	#pragma endregion
 
 	#pragma region Interpret player controls
-	double controllerSteer = this->player.right;
-			
+	this-> steer = this->player.right;
+
+	double brake = std::min((this->player.forward < 0) * this->BRAKE_FORCE, this->player.stop * this->E_BRAKE_FORCE);
+	double throttle = this->player.forward * this->ENGINE_FORCE;
 	#pragma endregion
 
 	#pragma region Pre calculate values
@@ -43,8 +45,8 @@ void Car::physicsUpdate(double frameDelta)
 	#pragma endregion
 
 	#pragma region Yaw speed
-	double yawSpeedFront = this->CG_TO_FRONT_AXLE * controllerSteer;
-	double yawSpeedBack = this->CG_TO_BACK_AXLE * controllerSteer;
+	double yawSpeedFront = this->CG_TO_FRONT_AXLE * this->angularVelocity;
+	double yawSpeedBack = -this->CG_TO_BACK_AXLE * this->angularVelocity;
 	#pragma endregion
 
 	#pragma region Slip angles
