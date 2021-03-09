@@ -57,7 +57,7 @@ void Car::physicsUpdate(double frameDelta)
 	double tyreGripBack = this->TYPE_GRIP * (1.f - this->player.stop * (1.f - this->LOCK_GRIP));
 	
 	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripFront, tyreGripFront) * frontWeight;
-	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripFront, tyreGripFront) * backWeight;
+	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripBack, tyreGripBack) * backWeight;
 	#pragma endregion
 
 
