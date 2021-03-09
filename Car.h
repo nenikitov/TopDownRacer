@@ -18,8 +18,6 @@ class Car
 		/// <param name="frameDelta">The difference between frames (in seconds) so the physics are untied from the framerate</param>
 		void physicsUpdate(double frameDelta);
 	private:
-		int sign(double value);
-
 		// References
 		/// <summary>
 		/// The reference to the player

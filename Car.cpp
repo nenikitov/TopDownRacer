@@ -1,12 +1,7 @@
 #include "Car.h"
 #include <iostream>
+#include "MoreMath.h"
 
-/// <summary>
-/// Initialize the car object
-/// </summary>
-/// <param name="player">The player that will control the car</param>
-/// <param name="carShape">The rectangle that represents the car</param>
-/// <returns></returns>
 Car::Car(Player& player, sf::RectangleShape& carShape) : carShape(carShape), player(player)
 {
 	//this->player = player;
@@ -20,20 +15,6 @@ Car::Car(Player& player, sf::RectangleShape& carShape) : carShape(carShape), pla
 	this->weightRatioBack = this->CG_TO_FRONT_AXLE / this->wheelBase;
 }
 
-/// <summary>
-/// Returns the sign of a number (-1, 1 or 0)
-/// </summary>
-/// <param name="value">Number to get the sign of</param>
-/// <returns></returns>
-int Car::sign(double value)
-{
-	return (value > 0) - (value < 0);
-}
-
-/// <summary>
-/// Update car physics. This will update the car's location and rotation using the player's controls
-/// </summary>
-/// <param name="frameDelta">The time difference in between the frames. It is used to untie the physics from the framerate</param>
 void Car::physicsUpdate(double frameDelta)
 {
 	#pragma region Sync car angle and position
@@ -68,12 +49,15 @@ void Car::physicsUpdate(double frameDelta)
 
 	#pragma region Slip angles
 	double slipAngleFront = atan2(this->velocityLocal.y + yawSpeedFront,
-		abs(this->velocityLocal.x) - sign(this->velocityLocal.x) * this->steer);
+		abs(this->velocityLocal.x) - MoreMath::sign(this->velocityLocal.x) * this->steer);
 	double slipAngleBack = atan2(this->velocityLocal.y + yawSpeedBack,
 		abs(this->velocityLocal.x));
 
 	double tyreGripFront = this->TYPE_GRIP;
 	double tyreGripBack = this->TYPE_GRIP * (1.f - this->player.stop * (1.f - this->LOCK_GRIP));
+	
+	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripFront, tyreGripFront) * frontWeight;
+	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripFront, tyreGripFront) * backWeight;
 	#pragma endregion
 
 
