@@ -62,6 +62,12 @@ void Car::physicsUpdate(double frameDelta)
 	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripBack, tyreGripBack) * backWeight;
 	#pragma endregion
 
+	#pragma region Resulting force (local)
+	sf::Vector2f tractrionForce_l = sf::Vector2f(throttle - brake * MoreMath::sign(this->velocityLocal.x), 0);
+	sf::Vector2f dragForce_l = sf::Vector2f(
+		-this->ROLL_RESISTANCE * this->velocityLocal.x - this->AIR_RESISTANCE * this->velocityLocal.x * abs(this->velocityLocal.x),
+		-this->ROLL_RESISTANCE * this->velocityLocal.y - this->AIR_RESISTANCE * this->velocityLocal.y * abs(this->velocityLocal.x));
+	#pragma endregion
 
 
 
