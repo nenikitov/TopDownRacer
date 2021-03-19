@@ -59,17 +59,23 @@ void Car::physicsUpdate(double frameDelta)
 	double tyreGripBack = this->TYPE_GRIP * (1.f - this->player.stop * (1.f - this->LOCK_GRIP));
 	
 	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripFront, tyreGripFront) * frontWeight;
-	double firctionFront = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripBack, tyreGripBack) * backWeight;
+	double firctionBack = MoreMath::clamp(-this->CORNER_STIFFNESS_FRONT * slipAngleFront, -tyreGripBack, tyreGripBack) * backWeight;
 	#pragma endregion
 
 	#pragma region Resulting force (local)
-	sf::Vector2f tractrionForce_l = sf::Vector2f(throttle - brake * MoreMath::sign(this->velocityLocal.x), 0);
+	sf::Vector2f tractrionForce_l = sf::Vector2f(
+		throttle - brake * MoreMath::sign(this->velocityLocal.x),
+		0);
 	sf::Vector2f dragForce_l = sf::Vector2f(
 		-this->ROLL_RESISTANCE * this->velocityLocal.x - this->AIR_RESISTANCE * this->velocityLocal.x * abs(this->velocityLocal.x),
 		-this->ROLL_RESISTANCE * this->velocityLocal.y - this->AIR_RESISTANCE * this->velocityLocal.y * abs(this->velocityLocal.x));
 	#pragma endregion
 
-
+	#pragma region Total force
+	sf::Vector2f totalForce_l = sf::Vector2f(
+		dragForce_l.x + tractrionForce_l.x,
+		dragForce_l.y + tractrionForce_l.y + cos(steer) * firctionFront + firctionBack);
+	#pragma endregion
 
 
 	#pragma region Moving in a straight line
