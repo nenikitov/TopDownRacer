@@ -78,9 +78,13 @@ void Car::physicsUpdate(double frameDelta)
 	#pragma endregion
 
 	#pragma region Acceleration
-	sf::Vector2f acceleration_l = sf::Vector2f(
+	this->accelerationLocal = sf::Vector2f(
 		totalForce_l.x - sinAngle * this->MASS,
 		totalForce_l.y + cosAngle * this->MASS);
+
+	this->acceleration = sf::Vector2f(
+		cosAngle * this->accelerationLocal.x - sinAngle * this->accelerationLocal.y,
+		sinAngle * this->accelerationLocal.x + cosAngle * this->accelerationLocal.y);
 	#pragma endregion
 
 
