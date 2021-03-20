@@ -77,9 +77,10 @@ void Car::physicsUpdate(double frameDelta)
 		dragForce_l.y + tractrionForce_l.y + cos(steer) * firctionFront + firctionBack);
 	#pragma endregion
 
-
-	#pragma region Moving in a straight line
-
+	#pragma region Acceleration
+	sf::Vector2f acceleration_l = sf::Vector2f(
+		totalForce_l.x - sinAngle * this->MASS,
+		totalForce_l.y + cosAngle * this->MASS);
 	#pragma endregion
 
 
